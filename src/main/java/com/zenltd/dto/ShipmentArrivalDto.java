@@ -1,73 +1,27 @@
 package com.zenltd.dto;
 
-import com.zenltd.entity.Shipment;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
+import javax.validation.constraints.*;
+import java.time.LocalDateTime;
 
-import javax.persistence.Column;
-import java.time.Instant;
-
+@Data
 public class ShipmentArrivalDto {
     private  long shipmentArrivalId;
-//    private Shipment shipment;
-    private long shipmentId;
+    @NotNull(message = "shipmentId Created cannot be null or blank")
+    @Positive
+    private Long shipmentId;
+
+    @NotBlank(message = "gateNumber cannot be blank/null/empty")
     private String gateNumber;
+
+    @NotBlank(message = "shipmentStatus cannot be blank/null/empty")
     private String shipmentStatus;
-    private Long updatedByEmployeeId;
-    private Instant dateCreated;
-    //**********************************************
 
-    public long getShipmentId() {
-        return shipmentId;
-    }
+    @NotNull(message = "updatedByEmployeeId cannot be blank")
+    @Positive
+    private Long updatedByUsername;
 
-    public void setShipmentId(long shipmentId) {
-        this.shipmentId = shipmentId;
-    }
-
-    public long getShipmentArrivalId() {
-        return shipmentArrivalId;
-    }
-
-    public void setShipmentArrivalId(long shipmentArrivalId) {
-        this.shipmentArrivalId = shipmentArrivalId;
-    }
-
-//    public Shipment getShipment() {
-//        return shipment;
-//    }
-//
-//    public void setShipment(Shipment shipment) {
-//        this.shipment = shipment;
-//    }
-
-    public String getGateNumber() {
-        return gateNumber;
-    }
-
-    public void setGateNumber(String gateNumber) {
-        this.gateNumber = gateNumber;
-    }
-
-    public String getShipmentStatus() {
-        return shipmentStatus;
-    }
-
-    public void setShipmentStatus(String shipmentStatus) {
-        this.shipmentStatus = shipmentStatus;
-    }
-
-    public Long getUpdatedByEmployeeId() {
-        return updatedByEmployeeId;
-    }
-
-    public void setUpdatedByEmployeeId(Long updatedByEmployeeId) {
-        this.updatedByEmployeeId = updatedByEmployeeId;
-    }
-
-    public Instant getDateCreated() {
-        return dateCreated;
-    }
-
-    public void setDateCreated(Instant dateCreated) {
-        this.dateCreated = dateCreated;
-    }
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime dateCreated;
 }

@@ -1,5 +1,4 @@
 package com.zenltd.enums;
-
 public enum ProductInspectionStatus {
     PASSED,       // Product is in good condition
     DAMAGED,      // Product is broken or defective

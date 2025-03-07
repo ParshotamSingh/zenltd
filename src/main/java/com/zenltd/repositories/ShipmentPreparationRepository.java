@@ -11,8 +11,8 @@ public interface ShipmentPreparationRepository extends JpaRepository<ShipmentPre
         @Query(value = "SELECT t FROM ShipmentPreparation t where t.shipmentId = :shipmentId")
         ShipmentPreparation getPreparationStatusByShipmentId(Long shipmentId);
 
-        @Query(value = "SELECT t FROM ShipmentPreparation t where t.status = :status")
-        List<ShipmentPreparation> getShipmentsByPreparationStatus(ShipmentPreparationStatus status);
+        @Query(value = "SELECT t FROM ShipmentPreparation t where t.preparationStatus = :preparationStatus")
+        List<ShipmentPreparation> getShipmentsByPreparationStatus(String preparationStatus);
 }
 
 

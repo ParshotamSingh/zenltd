@@ -1,129 +1,59 @@
 package com.zenltd.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
+import net.bytebuddy.asm.Advice;
+
+import javax.validation.Valid;
+import javax.validation.constraints.*;
 import java.awt.*;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
+@Data
 public class ShipmentDto {
-    private  long shipmentId;
-    private long memberId;
+    private  Long shipmentId;
+
+    @NotNull(message = "memberId cannot be null")
+    @Positive
+    private Long memberId;
+
+    @NotBlank(message = "shipmentBarcodeId cannot be blank")
     private String shipmentBarcodeId;
+
+    @NotBlank(message = "businessUnitId cannot be blank")
     private String businessUnitId;
+
+    @NotBlank(message = "referenceNumber cannot be blank")
     private String referenceNumber;
+
+    @NotBlank(message = "transportType cannot be blank")
     private String transportType;
-    private long shipmentTypeId;
+
+    @NotBlank(message = "shipmentType cannot be blank")
+    private String shipmentType;
+
+    @NotBlank(message = "source cannot be blank")
     private String source;
-    private String createdByUsername;
-    private String userUpdated;
-    private Instant dateCreated;
-    private Instant dateUpdated;
-    private Instant expectedDeliveryDate;
 
-    //*******************************************************
+    @NotNull(message = "createdByUsername cannot be null")
+    //ToDo must be present in employee table
+    private Long createdByUsername;
 
-    public long getMemberId() {
-        return memberId;
-    }
+    //ToDo must be present in employee table
+    private Long updatedByUsername;
 
-    public void setMemberId(long memberId) {
-        this.memberId = memberId;
-    }
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime dateCreated;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime dateUpdated;
 
-    public long getShipmentId() {
-        return shipmentId;
-    }
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime expectedDeliveryDate;
 
-    public void setShipmentId(long shipmentId) {
-        this.shipmentId = shipmentId;
-    }
-
-    public String getShipmentBarcodeId() {
-        return shipmentBarcodeId;
-    }
-
-    public void setShipmentBarcodeId(String shipmentBarcodeId) {
-        this.shipmentBarcodeId = shipmentBarcodeId;
-    }
-
-    public String getBusinessUnitId() {
-        return businessUnitId;
-    }
-
-    public void setBusinessUnitId(String businessUnitId) {
-        this.businessUnitId = businessUnitId;
-    }
-
-    public String getReferenceNumber() {
-        return referenceNumber;
-    }
-
-    public void setReferenceNumber(String referenceNumber) {
-        this.referenceNumber = referenceNumber;
-    }
-
-    public String getTransportType() {
-        return transportType;
-    }
-
-    public void setTransportType(String transportType) {
-        this.transportType = transportType;
-    }
-
-    public long getShipmentTypeId() {
-        return shipmentTypeId;
-    }
-
-    public void setShipmentTypeId(long shipmentTypeId) {
-        this.shipmentTypeId = shipmentTypeId;
-    }
-
-    public String getSource() {
-        return source;
-    }
-
-    public void setSource(String source) {
-        this.source = source;
-    }
-
-    public String getCreatedByUsername() {
-        return createdByUsername;
-    }
-
-    public void setCreatedByUsername(String createdByUsername) {
-        this.createdByUsername = createdByUsername;
-    }
-
-    public String getUserUpdated() {
-        return userUpdated;
-    }
-
-    public void setUserUpdated(String userUpdated) {
-        this.userUpdated = userUpdated;
-    }
-
-    public Instant getDateCreated() {
-        return dateCreated;
-    }
-
-    public void setDateCreated(Instant dateCreated) {
-        this.dateCreated = dateCreated;
-    }
-
-    public Instant getDateUpdated() {
-        return dateUpdated;
-    }
-
-    public void setDateUpdated(Instant dateUpdated) {
-        this.dateUpdated = dateUpdated;
-    }
-
-    public Instant getExpectedDeliveryDate() {
-        return expectedDeliveryDate;
-    }
-
-    public void setExpectedDeliveryDate(Instant expectedDeliveryDate) {
-        this.expectedDeliveryDate = expectedDeliveryDate;
-    }
+    private String currentStatus;
+    @Size(max = 100, message = "remarks should not exceed 100 characters")
+    private String remarks;
 }

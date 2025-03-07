@@ -14,6 +14,7 @@ public class EmployeeAllocationService{
     EmployeeAllocationRepository employeeAllocationRepository;
 
     public void saveEmployeeAllocation(EmployeeAllocationDto employeeAllocationDto){
+        // ToDo check employee exists or not
         EmployeeAllocation employeeAllocation = new EmployeeAllocation();
         employeeAllocation.setShipmentId(employeeAllocationDto.getShipmentId());
         employeeAllocation.setEmpId(employeeAllocationDto.getEmpId());

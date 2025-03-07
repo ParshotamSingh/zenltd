@@ -1,82 +1,38 @@
 package com.zenltd.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zenltd.enums.ProductInboundStatus;
 import com.zenltd.enums.ProductInspectionStatus;
+import lombok.Data;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.validation.constraints.*;
 import java.time.LocalDateTime;
-
+@Data
 public class InboundReceivingDto {
     private long id;
-    private long productCode;
-    private long shipmentId;
-    private long inspectorId;
+
+    @NotNull(message = "productCode cannot be null")
+    @Positive
+    //ToDo must already exist in product Table
+    private Long productCode;
+
+    private Long shipmentId;
+
+    @NotNull(message = "inspectorId cannot be null")
+    @Positive
+    //ToDo must already exist in Employee Table
+    //ToDo should be available in availability table
+    private Long inspectorId;
+
+    @NotNull(message = "productInspectionStatus cannot be null/blank/empty")
+    @Enumerated(EnumType.STRING) // Store as String instead of Ordinal
     private ProductInspectionStatus productInspectionStatus;
+
+    @Enumerated(EnumType.STRING) // Store as String instead of Ordinal
     private ProductInboundStatus productInboundStatus;
-    private LocalDateTime scannedTime;
-    private LocalDateTime inspectedTime;
-    //**********************************************************
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public long getProductCode() {
-        return productCode;
-    }
-
-    public void setProductCode(long productCode) {
-        this.productCode = productCode;
-    }
-
-    public long getShipmentId() {
-        return shipmentId;
-    }
-
-    public void setShipmentId(long shipmentId) {
-        this.shipmentId = shipmentId;
-    }
-
-    public long getInspectorId() {
-        return inspectorId;
-    }
-
-    public void setInspectorId(long inspectorId) {
-        this.inspectorId = inspectorId;
-    }
-
-    public ProductInspectionStatus getProductInspectionStatus() {
-        return productInspectionStatus;
-    }
-
-    public void setProductInspectionStatus(ProductInspectionStatus productInspectionStatus) {
-        this.productInspectionStatus = productInspectionStatus;
-    }
-
-    public ProductInboundStatus getProductInboundStatus() {
-        return productInboundStatus;
-    }
-
-    public void setProductInboundStatus(ProductInboundStatus productInboundStatus) {
-        this.productInboundStatus = productInboundStatus;
-    }
-
-    public LocalDateTime getScannedTime() {
-        return scannedTime;
-    }
-
-    public void setScannedTime(LocalDateTime scannedTime) {
-        this.scannedTime = scannedTime;
-    }
-
-    public LocalDateTime getInspectedTime() {
-        return inspectedTime;
-    }
-
-    public void setInspectedTime(LocalDateTime inspectedTime) {
-        this.inspectedTime = inspectedTime;
-    }
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime timeStamp;
 }

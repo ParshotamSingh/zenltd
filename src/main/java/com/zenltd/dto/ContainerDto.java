@@ -1,35 +1,14 @@
 package com.zenltd.dto;
-
-import java.util.List;
-
+import lombok.Data;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+@Data
 public class ContainerDto {
     private long id;
-    private long containerCode;
-    private long shipmentId;
-
-    //****************************************
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public long getContainerCode() {
-        return containerCode;
-    }
-
-    public void setContainerCode(long containerCode) {
-        this.containerCode = containerCode;
-    }
-
-    public long getShipmentId() {
-        return shipmentId;
-    }
-
-    public void setShipmentId(long shipmentId) {
-        this.shipmentId = shipmentId;
-    }
+    @NotNull(message = "containerCode cannot be null")
+    @Min(value =1, message = "containerCode can not be 0")
+    private Long containerCode;
+    @NotNull(message = "shipmentId cannot be null")
+    @Min(value =1, message = "shipmentId can not be 0")
+    private Long shipmentId;
 }

@@ -1,82 +1,27 @@
 package com.zenltd.dto;
 
 import com.zenltd.enums.EmployeeAvailabilityStatus;
+import lombok.Data;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.time.LocalDateTime;
-
+@Data
 public class EmployeeAvailabilityDto {
     private long id;
-    private long employeeId;
-    private String designation;
-    private String name;
-    private EmployeeAvailabilityStatus employeeAvailabilityStatus;
-    private String areaOfWork;
+    @NotNull(message = "employeeId cannot be null")
+    @Positive
+    //ToDo must already exist in employees Table
+    private Long employeeId;
+
+//    auto from Employee table
+//    private String designation;
+
+    private String employeeAvailabilityStatus;
+
+    @NotNull(message = "statusStartTime cannot be null")
     private LocalDateTime statusStartTime;
+
     private LocalDateTime statusEndTime;
-    //******************************************
-
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public LocalDateTime getStatusStartTime() {
-        return statusStartTime;
-    }
-
-    public void setStatusStartTime(LocalDateTime statusStartTime) {
-        this.statusStartTime = statusStartTime;
-    }
-
-    public LocalDateTime getStatusEndTime() {
-        return statusEndTime;
-    }
-
-    public void setStatusEndTime(LocalDateTime statusEndTime) {
-        this.statusEndTime = statusEndTime;
-    }
-
-    public long getEmployeeId() {
-        return employeeId;
-    }
-
-    public void setEmployeeId(long employeeId) {
-        this.employeeId = employeeId;
-    }
-
-    public String getDesignation() {
-        return designation;
-    }
-
-    public void setDesignation(String designation) {
-        this.designation = designation;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public EmployeeAvailabilityStatus getEmployeeAvailabilityStatus() {
-        return employeeAvailabilityStatus;
-    }
-
-    public void setEmployeeAvailabilityStatus(EmployeeAvailabilityStatus employeeAvailabilityStatus) {
-        this.employeeAvailabilityStatus = employeeAvailabilityStatus;
-    }
-
-    public String getAreaOfWork() {
-        return areaOfWork;
-    }
-
-    public void setAreaOfWork(String areaOfWork) {
-        this.areaOfWork = areaOfWork;
-    }
 }

@@ -12,5 +12,5 @@ public interface EmployeeAvailabilityRepository extends JpaRepository<EmployeeAv
     EmployeeAvailability getAvailabilityByEmpId(Long employeeId);
 
     @Query(value = "SELECT t FROM EmployeeAvailability t where t.employeeAvailabilityStatus = :employeeAvailabilityStatus")
-    List<EmployeeAvailability> getEmployeesByStatus(EmployeeAvailabilityStatus employeeAvailabilityStatus);
+    List<EmployeeAvailability> getEmployeesByStatus(String employeeAvailabilityStatus);
 }

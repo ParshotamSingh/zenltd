@@ -1,5 +1,7 @@
 package com.zenltd.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
 import javax.persistence.Column;
@@ -7,7 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.List;
-
+@Data
 @Entity
 @Table(name = "container")
 public class Container{
@@ -18,31 +20,4 @@ public class Container{
     private long containerCode;
     @Column (name = "shipment_id")
     private long shipmentId;
-    //****************************************
-
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public long getContainerCode() {
-        return containerCode;
-    }
-
-    public void setContainerCode(long containerCode) {
-        this.containerCode = containerCode;
-    }
-
-
-    public long getShipmentId() {
-        return shipmentId;
-    }
-
-    public void setShipmentId(long shipmentId) {
-        this.shipmentId = shipmentId;
-    }
 }

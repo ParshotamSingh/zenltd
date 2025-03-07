@@ -1,81 +1,37 @@
 package com.zenltd.dto;
 
-import com.zenltd.enums.ShipmentPreparationStatus;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
 
+import javax.persistence.Column;
+import javax.validation.constraints.*;
 import java.time.LocalDateTime;
-
+@Data
 public class ShipmentPreparationDto {
     private  long Id;
-    private long shipmentId;
+
+    @NotNull(message = "shipmentId cannot be null")
+    @Positive
+    //must already exist in shipmentDetails Table
+    private Long shipmentId;
+
+    @NotBlank(message = "gateNumber cannot be null/blank/empty")
     private String gateNumber;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime startTime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime lastUpdatedTime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime endTime;
-    private ShipmentPreparationStatus status;
+
+    @NotBlank(message = "Preparation Status cannot be null/blank/empty")
+    private String preparationStatus;
+
+    @NotNull(message = "updatedByUsername cannot be null")
+    @Positive
+    private Long updatedByUsername;
+
+    @Size(max = 100, message = "remarks should not exceed 100 characters")
     private String remarks; // Any additional comments
-    //*******************************************************
-
-    public LocalDateTime getLastUpdatedTime() {
-        return lastUpdatedTime;
-    }
-
-    public void setLastUpdatedTime(LocalDateTime lastUpdatedTime) {
-        this.lastUpdatedTime = lastUpdatedTime;
-    }
-
-    public long getId() {
-        return Id;
-    }
-
-    public void setId(long id) {
-        Id = id;
-    }
-
-    public long getShipmentId() {
-        return shipmentId;
-    }
-
-    public void setShipmentId(long shipmentId) {
-        this.shipmentId = shipmentId;
-    }
-
-    public String getGateNumber() {
-        return gateNumber;
-    }
-
-    public void setGateNumber(String gateNumber) {
-        this.gateNumber = gateNumber;
-    }
-
-    public LocalDateTime getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(LocalDateTime startTime) {
-        this.startTime = startTime;
-    }
-
-    public LocalDateTime getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(LocalDateTime endTime) {
-        this.endTime = endTime;
-    }
-
-    public ShipmentPreparationStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(ShipmentPreparationStatus status) {
-        this.status = status;
-    }
-
-    public String getRemarks() {
-        return remarks;
-    }
-
-    public void setRemarks(String remarks) {
-        this.remarks = remarks;
-    }
 }
