@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
-    boolean existsByProductCode(Long productCode); //whether  ProductCode already exists or not
+//    already exists boolean existsByProductCode(Long productCode); //whether  ProductCode already exists or not
     @Query(value = "SELECT t FROM Product t where t.id = :id")
     Product getProductById(Long id);
     @Query(value = "SELECT t FROM Product t where t.containerId = :containerId")

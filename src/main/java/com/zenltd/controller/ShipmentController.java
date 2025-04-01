@@ -56,7 +56,7 @@ public void cancelShipment (@Valid @RequestParam Long shipmentId,
     }
     @Operation(summary = "Get Status History of a Shipment")
     @GetMapping(value = "/getStatusHistoryByShipmentId")
-    public ResponseEntity< List<ShipmentStatusHistoryDto>> getStatusHistoryByShipmentId(long shipmentId) {
+    public ResponseEntity< List<ShipmentStatusHistoryDto>> getStatusHistoryByShipmentId(@Valid @RequestParam long shipmentId) {
         List<ShipmentStatusHistoryDto> ShipmentHistoryDtos = shipmentService.getStatusHistoryByShipmentId(shipmentId);
         return new ResponseEntity<>(ShipmentHistoryDtos, HttpStatus.OK);
     }

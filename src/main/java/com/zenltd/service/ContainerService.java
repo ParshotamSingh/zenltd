@@ -26,6 +26,7 @@ public class ContainerService {
     private ShipmentRepository shipmentRepository;
     public void saveContainer(ContainerDto containerDto) {
         log.info("Saving Container");
+//        null Check for shipmentId
         if(shipmentRepository.getShipmentById(containerDto.getShipmentId()) == null){
             throw new RuntimeException("Shipment Id does not exist");
         }
